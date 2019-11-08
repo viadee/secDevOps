@@ -9,6 +9,7 @@ plugins {
 	id 'org.springframework.boot' version '2.1.8.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'com.github.spotbugs' version '2.0.0'
+	id 'com.palantir.docker' version '0.22.1'
 	id 'war'
 	id 'idea'
 	id 'eclipse'
@@ -38,6 +39,13 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
         xml.enabled true
         xml.withMessages true
     }
+}
+
+docker {
+	dependsOn bootWar
+	name "${project.group}/${bootWar.baseName}"
+	files bootWar.archivePath, 'assets'
+	buildArgs(['WAR_FILE': "${bootWar.archiveName}"])
 }
 
 dependencies {
