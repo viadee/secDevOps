@@ -33,6 +33,13 @@ spotbugs {
 	ignoreFailures = true
 }
 
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled true
+        xml.withMessages true
+    }
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'

@@ -1,7 +1,7 @@
 pipeline { 
     agent any
     parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'schritt-1', selectedValue: 'DEFAULT', name: 'BRANCH', type: 'PT_BRANCH'
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'schritt-2', selectedValue: 'DEFAULT', name: 'BRANCH', type: 'PT_BRANCH'
     }
     options {
         skipStagesAfterUnstable()
@@ -27,6 +27,11 @@ pipeline {
             steps {
                 archiveArtifacts '**/vulnerapp*.war'
             }
+        }
+    }
+    post { 
+        always { 
+            recordIssues aggregatingResults: true, enabledForFailure: true, qualityGates: [[threshold: 10, type: 'TOTAL_ERROR', unstable: false], [threshold: 15, type: 'TOTAL_HIGH', unstable: false], [threshold: 30, type: 'TOTAL_NORMAL', unstable: false], [threshold: 50, type: 'TOTAL_LOW', unstable: false]], tools: [spotBugs(pattern: '**/spotbugs/main.xml')]
         }
     }
 }
