@@ -1,7 +1,7 @@
 pipeline { 
     agent any
     parameters {
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'schritt-0', selectedValue: 'DEFAULT', name: 'BRANCH', type: 'PT_BRANCH'
+        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'schritt-1', selectedValue: 'DEFAULT', name: 'BRANCH', type: 'PT_BRANCH'
     }
     options {
         skipStagesAfterUnstable()

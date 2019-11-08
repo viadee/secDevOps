@@ -1,6 +1,14 @@
+buildscript {
+	dependencies {
+		// Force guava 23.1 because of conflicts between spotbugs and docker plugins
+        classpath 'com.google.guava:guava:23.1-jre'
+    }
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.1.8.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'com.github.spotbugs' version '2.0.0'
 	id 'war'
 	id 'idea'
 	id 'eclipse'
@@ -19,6 +27,10 @@ bootRun {
 
 bootWar {
 	excludeDevtools = true
+}
+
+spotbugs {
+	ignoreFailures = true
 }
 
 dependencies {
@@ -40,5 +52,7 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	
 	implementation 'org.hsqldb:hsqldb'
+	
+	spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
 
