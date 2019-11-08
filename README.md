@@ -1,5 +1,4 @@
-# secDevOps
-Security DevOps: Vollautomatisches Securitytesting in der Build Pipeline
+# Security DevOps: Vollautomatisches Securitytesting in der Build Pipeline
 
 Die schrittweise Ergänzung des Builds und der Pipeline ist in den Branches nachvollziehbar.
 
